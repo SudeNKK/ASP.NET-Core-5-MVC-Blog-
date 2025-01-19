@@ -1,0 +1,33 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<div id="account-details">
+    <h3>Profil Ayarları</h3>
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+    <div class="register-form login-form clearfix">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                Ad
+                <input asp-for="Input.Name" class="form-control" required maxlength="30" minlength="2" pattern="[a-zA-ZiüöşğıoçİÜÖŞĞIOÇ ]*" oninput="this.reportValidity()" />
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Soyad
+                <input asp-for="Input.Surname" class="form-control" required maxlength="30" minlength="2" pattern="[a-zA-ZiüöşğıoçİÜÖŞĞIOÇ ]*" oninput="this.reportValidity()" />
+                <span asp-validation-for="Input.Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Telefon Numarası
+                <input type="tel" asp-for="Input.PhoneNumber" class="form-control" placeholder="05xxxxxxxxx" required onkeypress="return spaceBloker()" pattern="[0-9]{11}" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="register-box">
+                <button type="submit" class="return-customer-btn float-right">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>

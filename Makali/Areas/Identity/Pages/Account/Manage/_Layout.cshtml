@@ -1,0 +1,39 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb-list">
+            <li class="breadcrumb-item"><a asp-area="User" asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+            <li class="breadcrumb-item active">Hesap Ayarları</li>
+        </ol>
+    </div>
+</div>
+<div class="my-account white-bg ptb-90">
+    <div class="container">
+        <div class="account-dashboard">
+            <div class="row">
+                <div class="col-lg-2">
+                    <partial name="_ManageNav" />
+                </div>
+                <div class="col-lg-10">
+                    <div class="tab-content dashboard-content mt-all-40">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

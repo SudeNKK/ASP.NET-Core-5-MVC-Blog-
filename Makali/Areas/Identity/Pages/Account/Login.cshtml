@@ -1,0 +1,80 @@
+﻿@page
+@model LoginModel
+
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb-list">
+            <li class="breadcrumb-item"><a asp-area="User" asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+            <li class="breadcrumb-item active">Giriş</li>
+        </ol>
+    </div>
+</div>
+<div class="login ptb-90">
+    <div class="container">
+        <h3 class="login-header text-center">Hesabınıza Giriş Yapın</h3>
+        <div class="row">
+            <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2">
+                <div class="login-form">
+                    <form id="account" method="post">
+                        <div class="form-group row mb-20">
+                            <label for="email" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-7">
+                                <input type="email" asp-for="Input.Email" class="form-control" id="email" placeholder="Email" required onkeypress="return spaceBloker()" maxlength="64" minlength="6" />
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-20">
+                            <label for="inputPassword" class="col-sm-3 col-form-label">Parola</label>
+                            <div class="col-sm-7 position-relative">
+                                <input type="password" asp-for="Input.Password" class="form-control" id="inputPassword" placeholder="Parola" required onkeypress="return spaceBloker()" maxlength="16" minlength="5" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="login-details text-center mb-25">
+                            <button type="submit" class="login-btn">Giriş Yap</button>
+                        </div>
+                    </form>
+                    <div class="login-footer text-center">
+                        @{
+                            if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                            {
+                                <div class="login-details text-center mb-25">
+                                    <p>
+                                        Henüz Yapılandırılmış harici kimlik doğrulama hizmeti yok.
+                                    </p>
+                                </div>
+                            }
+                            else
+                            {
+                                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                    <div class="login-details text-center mb-25">
+                                        <p>
+                                            @foreach (var provider in Model.ExternalLogins)
+                                            {
+                                                @if (provider.Name == "Facebook")
+                                                {
+                                                    <button type="submit" class="login-btn" name="provider" value="@provider.Name" title="@provider.DisplayName ile giriş yap">@provider.DisplayName</button>
+                                                }
+                                                else if (provider.Name == "Google")
+                                                {
+                                                    <button type="submit" class="login-btn" name="provider" value="@provider.Name" title="@provider.DisplayName ile giriş yap">@provider.DisplayName</button>
+                                                }
+                                            }
+                                        </p>
+                                    </div>
+                                </form>
+                            }
+                        }
+                        <a asp-page="./ForgotPassword">Parolanızı mı unuttunuz?</a>
+                        <br />
+                        <a asp-page="./Register">Yeni bir kullanıcı olarak kaydolun</a>
+                        <br />
+                        <a asp-page="./ResendEmailConfirmation">E-posta onayını yeniden gönder</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

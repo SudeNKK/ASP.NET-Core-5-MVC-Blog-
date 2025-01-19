@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Faqs>
+
+    <div class="breadcrumb-area">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb-list">
+                <li class="breadcrumb-item"><a asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item active">Sıkça Sorulan Sorular</li>
+            </ol>
+        </div>
+    </div>
+<div class="register-area white-bg ptb-50">
+    <div class="container">
+        <h3 class="login-header">Sıkça Sorulan Sorular</h3>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="register-contact  clearfix">
+                    <div class="accordion">
+                        @foreach (var item in Model)
+                        {
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@item.Id" aria-expanded="true" aria-controls="collapse-@item.Id">
+                                        <span>@item.Question </span>
+                                        <i class="lastudioicon lastudioicon-down-arrow"></i>
+                                    </button>
+                                </h2>
+                                <div id="collapse-@item.Id" class="accordion-collapse collapse" data-bs-parent="#exampleOne">
+                                    <div class="accordion-body">@item.Answer</div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

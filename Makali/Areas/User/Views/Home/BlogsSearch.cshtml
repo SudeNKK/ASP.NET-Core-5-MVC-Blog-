@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Blog>
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb-list">
+            <li class="breadcrumb-item"><a asp-action="Index">Anasayfa</a></li>
+            <li class="breadcrumb-item active">Blog Ara</li>
+        </ol>
+    </div>
+</div>
+<div class="blog-area pt-90 pb-90">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>Aramaya Uygun Sonuçlar</h2>
+            <p>@(ViewBag.SearchText != null ? ViewBag.SearchText : "")</p>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+<div class="col-lg-4 col-md-6 mb-40">
+    <div class="single-blog">
+        <div class="blog-img">
+            <a asp-action="BlogDetails" asp-route-id="@item.Id">
+                @if (item.Image != null)
+                {
+<img src="@item.Image" alt="@item.Title"> }
+else
+{
+<img src="~/StaticFiles/resimyok.png" alt="@item.Title">}
+            </a>
+            <div class="entry-meta">
+                <div class="date">
+                    <p>@item.CreateDate.ToString("dd")</p>
+                    <span>@item.CreateDate.ToString("MMM")</span>
+                </div>
+            </div>
+        </div>
+        <div class="blog-content">
+            <h4>
+                <a asp-action="BlogDetails" asp-route-id="@item.Id">@item.Title</a>
+            </h4>
+            <ul class="meta-box">
+                <li class="meta-date">
+                    <span>
+                        <i class="fa fa-calendar" aria-hidden="true"></i>@item.CreateDate.ToString("dd/MM/yyyy")
+                    </span>
+                </li>
+            </ul>
+            <div class="small-btn">
+                <a asp-action="BlogDetails" asp-route-id="@item.Id">Oku</a>
+            </div>
+        </div>
+    </div>
+</div>}
+        </div>
+    </div>
+</div>

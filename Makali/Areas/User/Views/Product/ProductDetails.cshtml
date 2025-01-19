@@ -1,0 +1,111 @@
+﻿@model Product
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb-list">
+            <li class="breadcrumb-item"><a asp-area="User" asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+            <li class="breadcrumb-item"><a asp-action="ProductListForCategory" asp-route-id="@Model.CategoryId">@Model.ProductCategory.Title</a></li>
+            <li class="breadcrumb-item active">@Model.Title</li>
+        </ol>
+    </div>
+</div>
+<div class="main-product-thumbnail white-bg ptb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-all-40">
+                <div class="tab-content" id="myTabContent">
+                    @{
+                        bool control = false;
+                        if (Model.ProductImages.Count() > 0)
+                        {
+                            foreach (var item in Model.ProductImages)
+                            {
+                                if (control == false)
+                                {
+                                    <div class="tab-pane fade show active" id="thumb1-@item.Id" role="tabpanel" aria-labelledby="thumb1-tab-@item.Id">
+                                        <a data-fancybox="images" href="@item.Image">
+                                            <img src="@item.Image" alt="@Model.Title">
+                                        </a>
+                                    </div>
+                                    control = true;
+                                }
+                                else
+                                {
+                                    <div class="tab-pane" id="thumb1-@item.Id" role="tabpanel" aria-labelledby="thumb1-tab-@item.Id">
+                                        <a data-fancybox="images" href="@item.Image">
+                                            <img src="@item.Image" alt="@Model.Title">
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <div class="tab-pane fade show active">
+                                <img src="~/StaticFiles/resimyok.png" alt="@Model.Title">
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="product-thumbnail">
+                    <ul class="thumb-menu owl-carousel nav tabs-area nav nav-tabs" id="myTab" role="tablist">
+                        @{
+                            bool controls = false;
+                            if (Model.ProductImages.Count() > 0)
+                            {
+                                foreach (var item in Model.ProductImages)
+                                {
+                                    if (controls == false)
+                                    {
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="thumb1-tab-@item.Id" data-bs-toggle="tab" data-bs-target="#thumb1-@item.Id" type="button"
+                                                    role="tab" aria-controls="thumb1-@item.Id" aria-selected="true">
+                                                <img src="@item.Image" alt="@Model.Title">
+                                            </button>
+                                        </li>
+                                        controls = true;
+                                    }
+                                    else
+                                    {
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="thumb1-tab-@item.Id" data-bs-toggle="tab" data-bs-target="#thumb1-@item.Id" type="button"
+                                                    role="tab" aria-controls="thumb1-@item.Id" aria-selected="true">
+                                                <img src="@item.Image" alt="@Model.Title">
+                                            </button>
+                                        </li>
+                                    }
+                                }
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-6">
+                <div class="thubnail-desc fix">
+                    <h3 class="product-header">@Model.Title</h3>
+                    <div class="pro-thumb-price mt-10">
+                        <p class="d-flex align-items-center">
+                            <span class="price">@Model.Price.ToString("0.00")</span>
+                        </p>
+                    </div>
+                    <p class="pro-desc-details">
+                        @Model.Description
+                    </p>
+                    <div class="quatity-stock mt-30">
+                        <ul class="d-flex flex-wrap  align-items-center">
+                            <li>
+                                <a class="pro-cart" asp-area="User" asp-controller="Home" asp-action="Contact">İletişim</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Component.InvokeAsync("LastProducts")

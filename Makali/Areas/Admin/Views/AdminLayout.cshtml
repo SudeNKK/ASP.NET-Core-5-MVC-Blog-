@@ -1,0 +1,287 @@
+﻿<!doctype html>
+<html lang="tr">
+<head>
+    @await Component.InvokeAsync("MetaSettings")
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <noscript id="deferred-styles">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link rel="stylesheet" href="~/dist/css/spur.css">
+    </noscript>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    @*<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.colVis.min.js"></script>*@
+    <style>
+        * {
+            border-radius: 0 !important;
+        }
+
+        #editparent body {
+            font-family: "Open Sans", sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #494949;
+            background: #eaeaea;
+            margin: 5% 0;
+        }
+
+        #editparent h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+            color: inherit;
+            font-family: "Raleway", sans-serif;
+            font-weight: 300;
+            line-height: 1.1;
+        }
+
+        #editparent .title h1, .title h2, .title h3, .title h4 {
+            margin: 5px;
+        }
+
+        #editparent .title {
+            position: relative;
+            display: block;
+            padding-bottom: 0;
+            border-bottom: 3px double #dcdcdc;
+            margin-bottom: 30px;
+        }
+
+            #editparent .title::before {
+                width: 15%;
+                height: 3px;
+                background: #53bdff;
+                position: absolute;
+                bottom: -3px;
+                content: '';
+            }
+
+        #editparent a {
+            color: #53bdff;
+            text-decoration: none;
+            outline: 0;
+        }
+
+            #editparent a:hover {
+                color: #06a0ff;
+                text-decoration: none;
+            }
+
+        #editparent p {
+            margin: 10px 0;
+        }
+
+        /* ==========================================================================
+        WYSIWYG
+        ========================================================================== */
+        #editparent #editor {
+            resize: vertical;
+            overflow: auto;
+            line-height: 1.5;
+            background-color: #fafafa;
+            background-image: none;
+            border: 0;
+            border-bottom: 1px solid #3b8dbd;
+            min-height: 150px;
+            box-shadow: none;
+            padding: 8px 16px;
+            margin: 0 auto;
+            font-size: 14px;
+            transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+        }
+
+            #editparent #editor:focus {
+                background-color: #f0f0f0;
+                border-color: #38af5b;
+                box-shadow: none;
+                outline: 0 none;
+            }
+
+        /* ==========================================================================
+        Buttons
+        ========================================================================== */
+        #editparent .btn {
+            font-family: "Raleway", sans-serif;
+            font-weight: 300;
+            font-size: 1em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            border: none;
+            border-bottom: .15em solid black;
+            padding: 0.65em 1.3em;
+        }
+
+        #editparent .btn-xs {
+            font-size: .80em;
+            padding: .25em .75em;
+        }
+
+        #editparent .btn-default {
+            border-color: #d9d9d9;
+            background-image: linear-gradient(#ffffff, #f2f2f2);
+        }
+
+            #editparent .btn-default:hover {
+                background: linear-gradient(#f2f2f2, #e6e6e6);
+            }
+    </style>
+</head>
+<body>
+    <div class="dash">
+        <div class="dash-nav dash-nav-dark">
+            <header>
+                <a href="#!" class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <a asp-controller="User" asp-action="Index" class="spur-logo">
+                    <span>Admin Paneli</span>
+                </a>
+            </header>
+            <nav class="dash-nav-list">
+                <a class="dash-nav-item" asp-controller="User" asp-action="Index">
+                    <i class="fas fa-users"></i>Kullanıcılar
+                </a>
+            </nav>
+            <div class="dash-nav-dropdown @(ViewContext.RouteData.Values["Controller"].ToString()=="ProductCategory"?"show":ViewContext.RouteData.Values["Controller"].ToString()=="Products"?"show":"")">
+                <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
+                    <i class="fas fa-shopping-bag"></i>Ürün İşlemleri
+                </a>
+                <div class="dash-nav-dropdown-menu">
+                    <a asp-controller="ProductCategory" asp-action="Index" class="dash-nav-dropdown-item">Kategori</a>
+                    <a asp-controller="Products" asp-action="Index" class="dash-nav-dropdown-item">Ürünler</a>
+                </div>
+            </div>
+            <div class="dash-nav-dropdown @(ViewContext.RouteData.Values["Controller"].ToString()=="BlogCategory"?"show":ViewContext.RouteData.Values["Controller"].ToString()=="Blogs"?"show":"")">
+                <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
+                    <i class="fas fa-book-open"></i>Blog İşlemleri
+                </a>
+                <div class="dash-nav-dropdown-menu">
+                    <a asp-controller="BlogCategory" asp-action="Index" class="dash-nav-dropdown-item">Kategori</a>
+                    <a asp-controller="Blogs" asp-action="Index" class="dash-nav-dropdown-item">Bloglar</a>
+                </div>
+            </div>
+            <div class="dash-nav-dropdown @(ViewContext.RouteData.Values["Controller"].ToString()=="AboutUs"?"show":ViewContext.RouteData.Values["Controller"].ToString()=="Contact"?"show":ViewContext.RouteData.Values["Controller"].ToString()=="Slider"?"show":ViewContext.RouteData.Values["Controller"].ToString()=="OurTeam"?"show":ViewContext.RouteData.Values["Controller"].ToString()=="CustomerReview"?"show":ViewContext.RouteData.Values["Controller"].ToString()=="Faqs"?"show":ViewContext.RouteData.Values["Controller"].ToString()=="Contracts"?"show":ViewContext.RouteData.Values["Controller"].ToString()=="SocialMedias"?"show":ViewContext.RouteData.Values["Controller"].ToString()=="Whatsapp"?"show":"")">
+                <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
+                    <i class="fas fa-th-list"></i>İçerik Yönetimi
+                </a>
+                <div class="dash-nav-dropdown-menu">
+                    <a asp-controller="AboutUs" asp-action="Edit" class="dash-nav-dropdown-item">Hakkımızda</a>
+                    <a asp-controller="Contact" asp-action="Edit" class="dash-nav-dropdown-item">İletişim</a>
+                    <a asp-controller="Slider" asp-action="Index" class="dash-nav-dropdown-item">Slider</a>
+                    <a asp-controller="OurTeam" asp-action="Index" class="dash-nav-dropdown-item">Ekibimiz</a>
+                    <a asp-controller="CustomerReview" asp-action="Index" class="dash-nav-dropdown-item">Müşteri Yorumları</a>
+                    <a asp-controller="Faqs" asp-action="Index" class="dash-nav-dropdown-item">S.s.s.</a>
+                    <a asp-controller="Contracts" asp-action="Index" class="dash-nav-dropdown-item">Sözleşmeler</a>
+                    <a asp-controller="SocialMedias" asp-action="Index" class="dash-nav-dropdown-item">Sosyal Medya</a>
+                    <a asp-controller="Whatsapp" asp-action="Edit" class="dash-nav-dropdown-item">WhatsApp Hattı</a>
+                </div>
+            </div>
+            <div class="dash-nav-dropdown @(ViewContext.RouteData.Values["Controller"].ToString()=="Email"?"show":ViewContext.RouteData.Values["Controller"].ToString()=="Meta"?"show":"")">
+                <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
+                    <i class="fas fa-cogs"></i>Ayarlar
+                </a>
+                <div class="dash-nav-dropdown-menu">
+                    <a asp-controller="Email" asp-action="Edit" class="dash-nav-dropdown-item">Email Ayarları</a>
+                    <a asp-controller="Meta" asp-action="Edit" class="dash-nav-dropdown-item">Meta Ayarları</a>
+                </div>
+            </div>
+        </div>
+        @RenderBody()
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" defer></script>
+    <script src="~/dist/js/spur.js" defer></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            /** ******************************
+                * Simple WYSIWYG
+                ****************************** **/
+            $('#editControls a').click(function (e) {
+                e.preventDefault();
+                switch ($(this).data('role')) {
+                    case 'h1':
+                    case 'h2':
+                    case 'h3':
+                    case 'p':
+                        document.execCommand('formatBlock', false, $(this).data('role'));
+                        break;
+                    default:
+                        document.execCommand($(this).data('role'), false, null);
+                        break;
+                }
+
+                var textval = $("#editor").html();
+                $("#editorCopy").val(textval);
+            });
+
+            $("#editor").keyup(function () {
+                var value = $(this).html();
+                $("#editorCopy").val(value);
+            }).keyup();
+
+            $('#checkIt').click(function (e) {
+                e.preventDefault();
+                alert($("#editorCopy").val());
+            });
+        });
+    </script>
+    <script>
+        var loadDeferredStyles = function () {
+            var addStylesNode = document.getElementById("deferred-styles");
+            var replacement = document.createElement("div");
+            replacement.innerHTML = addStylesNode.textContent;
+            document.body.appendChild(replacement)
+            addStylesNode.parentElement.removeChild(addStylesNode);
+        };
+        var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+            webkitRequestAnimationFrame || msRequestAnimationFrame;
+        if (raf) raf(function () {
+            window.setTimeout(loadDeferredStyles, 0);
+        });
+        else window.addEventListener('load', loadDeferredStyles);
+    </script>
+    @*<script>
+    $('#myTable').dataTable({
+        dom: 'Bfrtip',
+        "bPaginate": false,
+        "bFilter": false,
+        "bInfo": false,
+        "paging": false,
+        "ordering": false,
+        buttons: [
+            {
+                extend: 'colvis',
+                text:'Sütun Seç',
+                collectionLayout: 'fixed columns',
+                collectionTitle: 'Column visibility control'
+            },
+            {
+                extend: 'excelHtml5',
+                title: '@DateTime.Now.ToString("dd/MM/yyyy HH.mm") Sipariş Listesi',
+                text: 'Excele Aktar',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                title: '@DateTime.Now.ToString("dd/MM/yyyy HH.mm") Sipariş Listesi',
+                text: 'Pdfe Aktar',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+        ]
+    });
+    </script>*@
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

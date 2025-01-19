@@ -1,0 +1,71 @@
+﻿@model Blog
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb-list">
+            <li class="breadcrumb-item"><a asp-action="Index">Anasayfa</a></li>
+            <li class="breadcrumb-item"><a asp-action="Blogs">Blog</a></li>
+            <li class="breadcrumb-item active">@Model.Title</li>
+        </ol>
+    </div>
+</div>
+<div class="blog-details-area white-bg ptb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-8">
+                <div class="blog-details mb-all-40">
+                    <div class="blog-hero-img mb-40">
+                        @if (Model.Image != null)
+                        {
+                    <img class="full-img" src="@Model.Image" alt="@Model.Title"> }
+                                else
+                                {
+                    <img src="~/StaticFiles/resimyok.png" alt="@Model.Title" />}
+                        <div class="entry-meta">
+                            <div class="date">
+                                <p>@Model.CreateDate.ToString("dd")</p>
+                                <span>@Model.CreateDate.ToString("MMM")</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-upper-portion">
+                        <h3 class="blog-dtl-header portfolio-header">@Model.Title</h3>
+                        <ul class="meta-box meta-blog d-flex">
+                            <li class="meta-date">
+                                <span>
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>@Model.CreateDate.ToString("dd/MM/yyyy")
+                                </span>
+                            </li>
+                        </ul>
+                        <p class="mb-20">
+                            @Html.Raw(Model.Text)
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4">
+                <div class="blog-sidebar right-sidebar mt-all-80">
+                    <div class="newsletter-box blog-details-box mb-40">
+                        <h3 class="sidebar-header">Blog Ara</h3>
+                        <form asp-action="BlogsSearch">
+                            <input class="subscribe" placeholder="Blog arama" name="q" type="text"  >
+                            <button type="submit" class="submit">Ara</button>
+                        </form>
+                    </div>
+                    <div class="categorie recent-post mb-60">
+                        <h3 class="sidebar-header">Kategoriler</h3>
+                        <ul class="categorie-list">
+                            @await Component.InvokeAsync("BlogCategory")
+                        </ul>
+                    </div>
+                    <div class="recent-post mb-60">
+                        <h3 class="sidebar-header">Son Bloglar</h3>
+                        <div class="all-recent-post">
+                            @await Component.InvokeAsync("RecentBlog")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

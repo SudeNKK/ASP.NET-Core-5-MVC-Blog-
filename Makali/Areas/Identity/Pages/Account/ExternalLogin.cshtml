@@ -1,0 +1,47 @@
+﻿@page
+@model ExternalLoginModel
+
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb-list">
+            <li class="breadcrumb-item"><a asp-area="User" asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+            <li class="breadcrumb-item active">Harici Giriş</li>
+        </ol>
+    </div>
+</div>
+<div class="register-area ptb-90">
+    <div class="container">
+        <h3 class="login-header"><strong>@Model.ProviderDisplayName</strong> ile başarıyla kimlik doğrulaması yaptınız Lütfen aşağıda bu site için bilgilerinizi girin ve oturum açmayı tamamlamak için Kayıt Ol butonuna tıklayın.</h3>
+        <div class="row">
+            <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2">
+                <div class="login-form">
+                    <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            Ad
+                            <input asp-for="Input.Name" class="form-control" required maxlength="30" minlength="2" pattern="[a-zA-ZiüöşğıoçİÜÖŞĞIOÇ ]*" oninput="this.reportValidity()" />
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            Soyad
+                            <input asp-for="Input.Surname" class="form-control" required maxlength="30" minlength="2" pattern="[a-zA-ZiüöşğıoçİÜÖŞĞIOÇ ]*" oninput="this.reportValidity()" />
+                            <span asp-validation-for="Input.Surname" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            Email Adresi
+                            <input asp-for="Input.Email" type="email" class="form-control" required onkeypress="return spaceBloker()" maxlength="64" minlength="6" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            Telefon Numarası
+                            <input type="tel" asp-for="Input.PhoneNumber" class="form-control" placeholder="05xxxxxxxxx" required onkeypress="return spaceBloker()" pattern="[0-9]{11}" />
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="return-customer-btn">Kayıt Ol</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

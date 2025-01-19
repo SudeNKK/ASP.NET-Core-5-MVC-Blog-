@@ -1,0 +1,24 @@
+﻿@model Contracts
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb-list">
+            <li class="breadcrumb-item"><a asp-action="Index">Anasayfa</a></li>
+            <li class="breadcrumb-item active">@Model.Heading</li>
+        </ol>
+    </div>
+</div>
+<div class="skill-area white-bg ptb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="about-content mb-all-40">
+                        <div class="about-title">
+                            <h3>@Model.Heading</h3>
+                        </div>
+                        <p>@Html.Raw(Model.Contract)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

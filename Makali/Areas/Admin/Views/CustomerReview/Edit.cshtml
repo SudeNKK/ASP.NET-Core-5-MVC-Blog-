@@ -1,0 +1,57 @@
+﻿@model CustomerReview
+
+<div class="dash-app">
+    <header class="dash-toolbar">
+        <a href="#!" class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </a>
+        <div class="tools">
+            <div class="dropdown tools-item">
+                <a asp-area="User" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main class="dash-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-icon">
+                                <i class="fas fa-th-list"></i>
+                            </div>
+                            <div class="spur-card-title">İçerik Yönetimi / Müşteri Yorumları / Güncelle</div>
+                        </div>
+                        <div class="card-body ">
+                            <form asp-action="Edit" method="post">
+                                <input type="hidden" asp-for="Id"/>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <strong>Müşteri Ad Soyad</strong>
+                                            <input type="text" asp-for="NameSurname" class="form-control" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <strong>Müşteri Yorumu</strong>
+                                            <textarea type="text" asp-for="review" class="form-control" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success">Güncelle</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right">
+                <a asp-action="Index" class="btn btn-warning btn-lg text-white">Geri Dön</a>
+            </div>
+        </div>
+    </main>
+</div>

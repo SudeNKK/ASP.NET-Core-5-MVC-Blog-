@@ -1,0 +1,102 @@
+﻿@model Blog
+
+<div class="dash-app">
+    <header class="dash-toolbar">
+        <a href="#!" class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </a>
+        <a href="#!" class="searchbox-toggle">
+            <i class="fas fa-search"></i>
+        </a>
+        <form class="searchbox" asp-action="Search" method="get">
+            <a href="#!" class="searchbox-toggle"> <i class="fas fa-arrow-left"></i> </a>
+            <button type="submit" class="searchbox-submit"> <i class="fas fa-search"></i></button>
+            <input type="text" class="searchbox-input" placeholder="Blog Ara" name="q">
+        </form>
+        <div class="tools">
+            <div class="dropdown tools-item">
+                <a asp-area="User" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main class="dash-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div class="spur-card-title">Blog İşlemleri / Bloglar / Ekle</div>
+                        </div>
+                        <div class="card-body ">
+                            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label><strong>Başlık</strong></label>
+                                        <input type="text" asp-for="Title" class="form-control" required />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label><strong>Blog Kategorisi</strong></label>
+                                        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId" required></select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label><strong>Oluşturulma Tarihi</strong></label>
+                                        <input asp-for="CreateDate" class="form-control" required />
+                                    </div> 
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label><strong>Resim</strong></label>
+                                        <input asp-for="Image" class="form-control-file" type="file" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="inputEmail4"><strong>Blog İçeriği</strong></label>
+                                        <div id="editparent" style="border-style:solid;border-width:1px;">
+                                            <div id="editControls">
+                                                <div class="btn-group">
+                                                    <a class="btn btn-xs btn-default" data-role="undo" href="#" title="Undo"><i class="fas fa-undo text-dark"></i></a>
+                                                    <a class="btn btn-xs btn-default" data-role="redo" href="#" title="Redo"><i class="fas fa-redo text-dark"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn btn-xs btn-default" data-role="bold" href="#" title="Bold"><i class="fas fa-bold text-dark"></i></a>
+                                                    <a class="btn btn-xs btn-default" data-role="italic" href="#" title="Italic"><i class="fas fa-italic text-dark"></i></a>
+                                                    <a class="btn btn-xs btn-default" data-role="underline" href="#" title="Underline"><i class="fas fa-underline text-dark"></i></a>
+                                                    <a class="btn btn-xs btn-default" data-role="strikeThrough" href="#" title="Strikethrough"><i class="fas fa-strikethrough text-dark"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn btn-xs btn-default" data-role="indent" href="#" title="Blockquote"><i class="fas fa-indent text-dark"></i></a>
+                                                    <a class="btn btn-xs btn-default" data-role="insertUnorderedList" href="#" title="Unordered List"><i class="fas fa-list-ul text-dark"></i></a>
+                                                    <a class="btn btn-xs btn-default" data-role="insertOrderedList" href="#" title="Ordered List"><i class="fas fa-list-ol text-dark"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <a class="btn btn-xs btn-default" data-role="h1" href="#" title="Heading 1"><i class="fas fa-heading text-dark"></i><sup class="text-dark">1</sup></a>
+                                                    <a class="btn btn-xs btn-default" data-role="h2" href="#" title="Heading 2"><i class="fas fa-heading text-dark"></i><sup class="text-dark">2</sup></a>
+                                                    <a class="btn btn-xs btn-default" data-role="h3" href="#" title="Heading 3"><i class="fas fa-heading text-dark"></i><sup class="text-dark">3</sup></a>
+                                                    <a class="btn btn-xs btn-default" data-role="p" href="#" title="Paragraph"><i class="fas fa-paragraph text-dark"></i></a>
+                                                </div>
+                                            </div>
+                                            <div id="editor" contenteditable></div>
+                                            <textarea asp-for="Text" id="editorCopy" required="required" style="display:none;" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Ekle</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right">
+                <a asp-action="Index" class="btn btn-warning btn-lg text-white">Geri Dön</a>
+            </div>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,105 @@
+﻿@page
+@model RegisterModel
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb-list">
+            <li class="breadcrumb-item"><a asp-area="User" asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+            <li class="breadcrumb-item active">Kayıt Ol</li>
+        </ol>
+    </div>
+</div>
+<div class="register-area ptb-90">
+    <div class="container">
+        <h3 class="login-header">Yeni Bir Hesap Oluşturun</h3>
+        <div class="row">
+            <div class="offset-xl-1 col-xl-10">
+                <div class="register-form login-form clearfix">
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <p> <a asp-page="./Login">Zaten hesabınız var mı?</a></p>
+                        <div class="form-group row mb-20">
+                            <label for="f-name" class="col-lg-3 col-md-3 col-form-label">Ad</label>
+                            <div class="col-lg-6 col-md-6">
+                                <input asp-for="Input.Name" type="text" class="form-control" id="f-name" required maxlength="30" minlength="2" pattern="[a-zA-ZiüöşğıoçİÜÖŞĞIOÇ ]*" oninput="this.reportValidity()" />
+                                <span asp-validation-for="Input.Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-20">
+                            <label for="l-name" class="col-lg-3 col-md-3 col-form-label">Soyad</label>
+                            <div class="col-lg-6 col-md-6">
+                                <input asp-for="Input.Surname" type="text" class="form-control" id="f-name" required maxlength="30" minlength="2" pattern="[a-zA-ZiüöşğıoçİÜÖŞĞIOÇ ]*" oninput="this.reportValidity()" />
+                                <span asp-validation-for="Input.Surname" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-20">
+                            <label for="email" class="col-lg-3 col-md-3 col-form-label">Email Adresi</label>
+                            <div class="col-lg-6 col-md-6">
+                                <input type="email" asp-for="Input.Email" id="email" class="form-control" required onkeypress="return spaceBloker()" maxlength="64" minlength="6" />
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-20">
+                            <label for="email" class="col-lg-3 col-md-3 col-form-label">Telefon Numarası</label>
+                            <div class="col-lg-6 col-md-6">
+                                <input type="tel" asp-for="Input.PhoneNumber" class="form-control" placeholder="05xxxxxxxxx" required onkeypress="return spaceBloker()" pattern="[0-9]{11}" />
+                                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-20">
+                            <label for="inputPassword" class="col-lg-3 col-md-3 col-form-label">Parola</label>
+                            <div class="position-relative col-lg-6 col-md-6">
+                                <input type="password" asp-for="Input.Password" id="inputPassword" class="form-control" required onkeypress="return spaceBloker()" maxlength="16" minlength="5" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-20">
+                            <label for="inputPassword" class="col-lg-3 col-md-3 col-form-label">Parola Tekrar</label>
+                            <div class="position-relative col-lg-6 col-md-6">
+                                <input type="password" asp-for="Input.ConfirmPassword" id="inputPassword" class="form-control" required onkeypress="return spaceBloker()" maxlength="16" minlength="5" />
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="register-box mt-40">
+                            <button type="submit" class="login-btn float-right">Kayıt Ol</button>
+                        </div>
+                    </form>
+                    <br />
+                    <div class="login-footer text-center">
+                        @{
+                            if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                            {
+                                <div class="login-details text-center mb-25">
+                                    <p>
+                                        Henüz Yapılandırılmış harici kimlik doğrulama hizmeti yok.
+                                    </p>
+                                </div>
+                            }
+                            else
+                            {
+                                <h4>Kaydolmak için başka bir hizmet kullanın.</h4>
+                                <br />
+                                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                    <div class="login-details text-center mb-25">
+                                        <p>
+                                            @foreach (var provider in Model.ExternalLogins)
+                                            {
+                                                @if (provider.Name == "Facebook")
+                                                {
+                                                    <button type="submit" class="login-btn" name="provider" value="@provider.Name" title="@provider.DisplayName ile giriş yap">@provider.DisplayName</button>
+                                                }
+                                                else if (provider.Name == "Google")
+                                                {
+                                                    <button type="submit" class="login-btn" name="provider" value="@provider.Name" title="@provider.DisplayName ile giriş yap">@provider.DisplayName</button>
+                                                }
+                                            }
+                                        </p>
+                                    </div>
+                                </form>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

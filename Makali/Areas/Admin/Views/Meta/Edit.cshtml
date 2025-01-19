@@ -1,0 +1,130 @@
+﻿@model Meta
+
+<div class="dash-app">
+    <header class="dash-toolbar">
+        <a href="#!" class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </a>
+        <div class="tools">
+            <div class="dropdown tools-item">
+                <a asp-area="User" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main class="dash-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="spur-card-title">Ayarlar / Meta Ayarları</div>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="Edit" enctype="multipart/form-data">
+                                <input type="hidden" asp-for="Id"/>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <strong>Site Title (Web sayfanızın başlığı)</strong>
+                                        <br />
+                                        <b>
+                                            <label class="text-warning">
+                                                Öneri: En fazla 50-60 karakter olmalıdır.
+                                            </label><br />
+                                            <label class="text-info">Karakter  :</label>
+                                            <label class="text-danger" id="titleCharacterShow">0</label>
+                                        </b>
+                                        <input id="titleCharacter" asp-for="SiteTitle" class="form-control" required />
+                                    </div>
+                                    <div class="form-group col-md-6">
+
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <strong>Site Description (web sayfanızın içeriği ilgili kısa bir açıklama yaptığınız ve arama sonuçlarında kullanıcıların görebildiği bir meta tag'dir)</strong>
+                                        <br />
+                                        <b>
+                                            <label class="text-warning">
+                                                Öneri: 50 ile 150 karakter arası olmalıdır.
+                                            </label><br />
+                                            <label class="text-info">Karakter :</label>
+                                            <label class="text-danger" id="DescriptionCharacterShow">0</label>
+                                        </b>
+                                        <textarea id="DescriptionCharacter" asp-for="SiteDescription" style="height:100px" class="form-control" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <strong>Site Keywords (Keyword, web sitenizde yer alan ürün ve hizmetlere ilişkin seçilmesi ve düzenlenmesi gereken anahtar kelimeleri ifade eder)</strong>
+                                        <br />
+                                        <b>
+                                            <label class="text-warning">
+                                                Öneri: Anahtar kelimeler 5 ile 10 kelime arası olmalıdır. | Kelime aralarında ',' olmalıdır.
+                                            </label><br />
+                                            <label class="text-info">Kelime :</label>
+                                            <label class="text-danger" id="KeywordsWordsCountShow">0</label>
+                                        </b>
+                                        <input id="keywordsWords" asp-for="SiteKeywords" class="form-control" required />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <strong>Site Icon (web sitesini veya bir web sayfasını temsil etmek için tarayıcılarda kullanılan küçük bir simgedir)</strong>
+                                        <br />
+                                        @if (Model.SiteIconImage != null)
+                                        {
+                                            <img src="@Model.SiteIconImage" style="height:150px;width:auto"/>
+                                        }
+                                        else
+                                        {
+                                            <img src="~/StaticFiles/resimyok.png" style="height:150px;width:auto"/>
+                                        }
+                                        <input asp-for="SiteIconImage" type="file" class="form-control-file" />
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success">Güncelle</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        var TitleChacaterCount = 0;
+        $("#titleCharacter").keyup(function () {
+            TitleChacaterCount = $("#titleCharacter").val().length;
+            $("#titleCharacterShow").html(TitleChacaterCount);
+        });
+        TitleChacaterCount = $("#titleCharacter").val().length;
+        $("#titleCharacterShow").html(TitleChacaterCount);
+        var DescriptionChacaterCount = 0;
+        $("#DescriptionCharacter").keyup(function () {
+            DescriptionChacaterCount = $("#DescriptionCharacter").val().length;
+            $("#DescriptionCharacterShow").html(DescriptionChacaterCount);
+        });
+        DescriptionChacaterCount = $("#DescriptionCharacter").val().length;
+        $("#DescriptionCharacterShow").html(DescriptionChacaterCount);
+        var keywordsWordsCount = 0;
+        $("#keywordsWords").keyup(function () {
+            var a = $("#keywordsWords").val();
+            var words = new Array();
+            words = a.split(',');
+            var cnt = words.length;
+            $("#KeywordsWordsCountShow").html(cnt);
+        });
+        var a = $("#keywordsWords").val();
+        var words = new Array();
+        words = a.split(',');
+        var cnt = words.length;
+        $("#KeywordsWordsCountShow").html(cnt);
+    });
+</script>
+
