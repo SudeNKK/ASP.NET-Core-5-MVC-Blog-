@@ -64,6 +64,10 @@ dotnet ef database update
 dotnet run
 ```
 
+### Youtube Link:
+``` bash
+https://youtu.be/KtFgPTF6OBI?si=1zseml4pzXn758Ek
+
 ---
 
 
